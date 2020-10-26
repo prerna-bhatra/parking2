@@ -44,7 +44,7 @@ if(i<3)
 {
 	dur[i]=min[i]
 }
-if(hrs[i]>0)
+else if(hrs[i]>0)
 {
 	dur[i]=parseInt(hrs[i]*60)+parseInt(min[i])
 }
