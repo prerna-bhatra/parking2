@@ -40,6 +40,10 @@ startTimemin[i]=moment(bookings[i].createdAt).format('mm')
 startTimehrs=moment(bookings[i].createdAt).format('hh')
 hrs[i]=moment.utc(moment(currentDatehrs, "hh").diff(moment(startTimehrs[i], "hh"))).format("hh")
 min[i] = moment.utc(moment(currentDatemin, "mm").diff(moment(startTimemin[i], "mm"))).format("mm")
+if(i<3)
+{
+	dur[i]=min[i]
+}
 if(hrs[i]>0)
 {
 	dur[i]=parseInt(hrs[i]*60)+parseInt(min[i])
