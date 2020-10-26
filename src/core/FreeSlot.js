@@ -23,7 +23,8 @@ const FreeSlot=()=>{
 	}
 	const renderBookings=()=>
 	{
-		var currentDate = moment().format("HH:mm:ss");
+		var currentDatehrs = moment().format("HH");
+		var currentDatemin = moment().format("mm");
 
 		let min=[]
 		let hrs=[]
@@ -36,19 +37,26 @@ const FreeSlot=()=>{
 		{
 startTimemin[i]=moment(bookings[i].createdAt).format('mm')
 startTimehrs=moment(bookings[i].createdAt).format('hh')
-hrs[i]=moment.utc(moment(currentDate, "hh").diff(moment(startTimehrs[i], "hh"))).format("hh")
-min[i] = moment.utc(moment(currentDate, "mm").diff(moment(startTimemin[i], "mm"))).format("mm")
-dur[i]=parseInt(hrs[i]*60)+parseInt(min[i])
+hrs[i]=moment.utc(moment(currentDatehrs, "hh").diff(moment(startTimehrs[i], "hh"))).format("hh")
+min[i] = moment.utc(moment(currentDatemin, "mm").diff(moment(startTimemin[i], "mm"))).format("mm")
+if(hrs[i]>0)
+{
+	dur[i]=parseInt(hrs[i]*60)+parseInt(min[i])
+}
+else
+{
+	dur[i]=min[i]
+}
+
 mybookings.push(
-<div className="card">
+<div className="card" style={{"background-color":"red" ,"margin":"10px 10px 10px 10px","color":"white"}}>
 <div className="card-header">
 Booked <br/>
-on:{moment(bookings[i].createdAt).format('YYYY-MM-DD')}
-at:{moment(bookings[i].createdAt).format('HH:mm')}<br/>
-Duration-:{hrs[i]} Hours {min[i]} Min<br/>
+on date:{moment(bookings[i].createdAt).format('YYYY-MM-DD')} <br/>
+at time:{moment(bookings[i].createdAt).format('HH:mm')}<br/>
 Total payment-:{dur[i]} rupees
 </div>
-<button className="btn btn-dark" id={i} value={bookings[i].slotNumber  }  onClick={e=>(FREESLOT(e.target.value))} style={{"margin":"20px 20px 20px 20px","width":"200px"}}>FREE {bookings[i].slotNumber}
+<button className="btn btn-success" id={i} value={bookings[i].slotNumber  }  onClick={e=>(FREESLOT(e.target.value))} style={{"margin":"20px 20px 20px 20px","width":"200px"}}>FREE {bookings[i].slotNumber}
 	
 </button>
 </div>
@@ -71,8 +79,9 @@ Total payment-:{dur[i]} rupees
 	},[])
 	return (
 			<Layout className="container" title="My Bookings"  >
+			<center> <h6 style={{"color":"lime"}}>Charges are 1 rupee per minute</h6> </center>
 			<div className="row">
-				{renderBookings()}
+			{renderBookings()}
 			</div>
 			</Layout>
 		)
