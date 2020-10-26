@@ -15,3 +15,13 @@
 {
 	margin: 200px 20px 50px 100px;
 }
+
+#booking
+{
+background-color:red;
+margin:10px 10px 10px 10px;
+color: white;
+border-top-right-radius: 30%;
+border-bottom-left-radius: 30%;
+padding: 20px 20px 20px 20px;
+}

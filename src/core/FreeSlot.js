@@ -5,6 +5,7 @@ import {isAuthenticated} from '../auth'
 import {BASE_URL} from "../config.js"
 import Moment from 'react-moment';
 import moment from 'moment';
+import './core.css'
 //{JSON.stringify(bookings)}
 const FreeSlot=()=>{
 	const {user}=isAuthenticated()
@@ -39,7 +40,11 @@ startTimemin[i]=moment(bookings[i].createdAt).format('mm')
 startTimehrs=moment(bookings[i].createdAt).format('hh')
 hrs[i]=moment.utc(moment(currentDatehrs, "hh").diff(moment(startTimehrs[i], "hh"))).format("hh")
 min[i] = moment.utc(moment(currentDatemin, "mm").diff(moment(startTimemin[i], "mm"))).format("mm")
-if(hrs[i]>0)
+if(i<3)
+{
+	dur[i]=min[i]
+}
+else if(hrs[i]>0)
 {
 	dur[i]=parseInt(hrs[i]*60)+parseInt(min[i])
 }
@@ -49,12 +54,14 @@ else
 }
 
 mybookings.push(
-<div className="card" style={{"background-color":"red" ,"margin":"10px 10px 10px 10px","color":"white"}}>
+<div className="card" id="booking" >
 <div className="card-header">
 Booked <br/>
 on date:{moment(bookings[i].createdAt).format('YYYY-MM-DD')} <br/>
 at time:{moment(bookings[i].createdAt).format('HH:mm')}<br/>
-Total payment-:{dur[i]} rupees
+Total payment-:{dur[i]} rupees<br/>
+
+
 </div>
 <button className="btn btn-success" id={i} value={bookings[i].slotNumber  }  onClick={e=>(FREESLOT(e.target.value))} style={{"margin":"20px 20px 20px 20px","width":"200px"}}>FREE {bookings[i].slotNumber}
 	

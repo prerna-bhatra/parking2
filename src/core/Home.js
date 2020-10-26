@@ -41,19 +41,7 @@ const Home=()=>{
 		}
 
 
-		const showSlots=()=>
-		{
-			var rows = [];
-			//console.log(slots)
-		for (var i = 0; i < slots; i++) {
-			
-rows.push(<button className="btn btn-success" onClick={e=>(createSlot(e.target.value))} id={i} value={i} style={{"margin":"5px 5px 5px 5px"}}>SLOT {i}</button>);
-		}
-
-		return (
-			rows
-		)
-		}
+		
 
 		const [newSlot, setNewSlot] = useState([]);
 		const [bookedSlot, setBookedSlot] = useState([])
@@ -94,12 +82,8 @@ rows.push(<button className="btn btn-success" onClick={e=>(createSlot(e.target.v
 				if(!check){
 					slot.push(<button className="btn btn-success" onClick={e=>(createSlot(e.target.value))} id={i} value={i} style={{"margin":"20px 20px 20px 20px","width":"200px"}}>SLOT {i}</button>)
 				}
-				/*else if(bookedusers )
-				{
-					slot.push(<button className="btn btn-primary"  id={i} value={i} style={{"margin":"20px 20px 20px 20px","width":"200px"}}>Free {i}</button>)
-				}*/
 				else{
-					slot.push(<button className="btn btn-danger" disabled  id={i} value={i} style={{"margin":"20px 20px 20px 20px","width":"200px"}}>BOOKED {i}</button>)
+					slot.push(<button className="btn btn-danger" disabled  id={i} value={i} style={{"margin":"20px 20px 20px 20px","width":"200px","z-index":"-999"}}>BOOKED {i}</button>)
 				}
 			}
 

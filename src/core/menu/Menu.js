@@ -6,9 +6,9 @@ const Menu=()=>{
 	const {user,token}=isAuthenticated()
 return (
 	<div >
-		<ul className="nav nav-tabs bg-danger" style={{padding:"10px 10px 10px 10px" , position: "fixed",top:" 0", width: "100%"}}>
+		<ul className="nav nav-tabs bg-dark" style={{padding:"10px 10px 10px 10px" , position: "fixed",top:" 0", width: "100%","z-index":"1"}}>
 			<li className="nav-item">
-				<Link className="nav-link btn-danger" style={{color:'white'}} to="/">
+				<Link className="nav-link btn-dark" style={{color:'white'}} to="/">
 					Home
 				</Link>
 			</li>
@@ -20,7 +20,7 @@ return (
 			
 			{isAuthenticated()  && isAuthenticated().user.role===0 && (
 					<li className="nav-item">
-				<Link className="nav-link btn-danger" style={{color:'white'}} to="/dashboard">
+				<Link className="nav-link btn-dark" style={{color:'white'}} to="/dashboard">
 					My Dashboard
 				</Link>
 				</li>
@@ -29,7 +29,7 @@ return (
 
 				{isAuthenticated()  && isAuthenticated().user.role===1 && (
 					<li className="nav-item">
-				<Link className="nav-link btn-danger" style={{color:'white'}} to="/admin/dashboard">
+				<Link className="nav-link btn-dark" style={{color:'white'}} to="/admin/dashboard">
 					My Dashboard
 				</Link>
 			</li>
@@ -42,10 +42,10 @@ return (
 			{!isAuthenticated() && (
 				<Fragment>
 				<li className="nav-item">
-					<Link className="nav-link btn-danger" style={{color:'white'}} to="/singin">SignIn</Link>
+					<Link className="nav-link btn-dark" style={{color:'white'}} to="/singin">SignIn</Link>
 				</li>
 				<li className="nav-item">
-					<Link className="nav-link btn-danger" style={{color:'white'}} to="/signup">SignUp</Link>
+					<Link className="nav-link btn-dark" style={{color:'white'}} to="/signup">SignUp</Link>
 				</li>
 				</Fragment>
 				)}
@@ -55,10 +55,10 @@ return (
 				{isAuthenticated() && (
 				<Fragment>
 				<li className="nav-item">
-					<Link className="nav-link btn-danger" style={{color:'white'}} to={`/freeSlot/${user._id}`}>My Bookings</Link>
+					<Link className="nav-link btn-dark" style={{color:'white'}} to={`/freeSlot/${user._id}`}>My Bookings</Link>
 				</li>
 				<li className="nav-item">
-							<Link className="nav-link btn-danger" style={{cursor:'pointer',color:'white'}} onClick={()=>signout(()=>{
+							<Link className="nav-link btn-dark" style={{cursor:'pointer',color:'white'}} onClick={()=>signout(()=>{
 					return <Redirect to='/'  />
 						})}>
 						Signout</Link>
