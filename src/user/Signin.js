@@ -26,9 +26,9 @@ const Signin=()=>{
 			setValues({...values,error:false,loading:true})
 			signin({email,password})
 			.then(data=>{
-				if(!data || email==='' ||  password==='')
+				if( email==='' ||  password==='' || data.err)
 				{
-					setValues({...values,error:"Invalid credentials or server error",loading:false})
+					setValues({...values,error:"Invalid credentials ",loading:false})
 				}
 				else{
 					authenticate(data,()=>{
@@ -48,13 +48,13 @@ const Signin=()=>{
 		<form action="">
 			<div className="form-group">	
 				<label className="text-muted">Email</label>
-				<input   type="email" value={email} className="form-control" onChange={handleChange('email')}   required/>
+				<input required  type="email" value={email} className="form-control" onChange={handleChange('email')}   />
 			</div>
 			<div className="form-group">	
 				<label className="text-muted">Password</label>
-				<input type="password" value={password} className="form-control" onChange={handleChange('password')} required/>
+				<input  required type="password" value={password} className="form-control" onChange={handleChange('password')}/>
 			</div>
-			<button onClick={clickSubmit} className="btn btn-primary" >Submit</button>
+			<button onClick={clickSubmit} className="btn btn-primary" >Login</button>
 		</form>
 	)
 

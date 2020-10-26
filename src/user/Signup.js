@@ -25,7 +25,11 @@ const Signup=()=>{
 			
 			signup({name,email,password,contact})
 			.then(data=>{
-				if(!data || email==='')
+				if(email==='' || password===''|| contact==='')
+				{
+					setValues({...values,error:"empty",success:false})
+				}
+				if(data.err)
 				{
 					setValues({...values,error:"error",success:false})
 				}
@@ -52,7 +56,7 @@ const Signup=()=>{
 			</div>
 			<div className="form-group">	
 				<label className="text-muted">Email</label>
-				<input type="email" required value={email} className="form-control" onChange={handleChange('email')} />
+				<input type="Email" required value={email} className="form-control" onChange={handleChange('email')} />
 			</div>
 			<div className="form-group">	
 				<label className="text-muted">Password</label>
@@ -67,10 +71,21 @@ const Signup=()=>{
 	)
 
 	const showError=()=>{
-		return (
-		<div  className="alert alert-danger" style={{display:error?'':'none'}}>
-			Already exists Email or not valid data or server error
+		if(error==="empty")
+		{
+			return (
+		<div  className="alert alert-danger">
+			All fields  are required
 		</div>)
+			
+		}
+		else if(error==='error')
+		{
+			return (
+		<div  className="alert alert-danger" >
+			Already exists Email or Invalid Data 
+		</div>)
+		}
 	}
 
 	const showSuccess=()=>{

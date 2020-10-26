@@ -40,11 +40,7 @@ startTimemin[i]=moment(bookings[i].createdAt).format('mm')
 startTimehrs=moment(bookings[i].createdAt).format('hh')
 hrs[i]=moment.utc(moment(currentDatehrs, "hh").diff(moment(startTimehrs[i], "hh"))).format("hh")
 min[i] = moment.utc(moment(currentDatemin, "mm").diff(moment(startTimemin[i], "mm"))).format("mm")
-if(i<3)
-{
-	dur[i]=min[i]
-}
-else if(hrs[i]>0)
+if(hrs[i]>0)
 {
 	dur[i]=parseInt(hrs[i]*60)+parseInt(min[i])
 }
@@ -60,7 +56,9 @@ Booked <br/>
 on date:{moment(bookings[i].createdAt).format('YYYY-MM-DD')} <br/>
 at time:{moment(bookings[i].createdAt).format('HH:mm')}<br/>
 Total payment-:{dur[i]} rupees<br/>
-
+{hrs[i]}<br/>
+{currentDatehrs}<br/>
+{startTimehrs[i]}
 
 </div>
 <button className="btn btn-success" id={i} value={bookings[i].slotNumber  }  onClick={e=>(FREESLOT(e.target.value))} style={{"margin":"20px 20px 20px 20px","width":"200px"}}>FREE {bookings[i].slotNumber}
