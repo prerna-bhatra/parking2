@@ -3,6 +3,8 @@ import Layout from './Layout'
 import axios from 'axios'
 import {isAuthenticated} from '../auth'
 import {BASE_URL} from "../config.js"
+import Moment from 'react-moment';
+import moment from 'moment';
 //{JSON.stringify(bookings)}
 const FreeSlot=()=>{
 	const {user}=isAuthenticated()
@@ -21,13 +23,32 @@ const FreeSlot=()=>{
 	}
 	const renderBookings=()=>
 	{
+		var currentDate = moment().format("HH:mm:ss");
 
+		let dur=[]
+		let startTime=[]
 		let mybookings=[]
 
 		for(var i=0;i<bookings.length;i++)
 		{
-			mybookings.push(
-			<button className="btn btn-dark" id={i} value={bookings[i].slotNumber}  onClick={e=>(FREESLOT(e.target.value))} style={{"margin":"20px 20px 20px 20px","width":"200px"}}>FREE {bookings[i].slotNumber}</button>)
+startTime[i]=moment(bookings[i].createdAt).format('HH:mm')
+ dur[i] = moment.utc(moment(currentDate, "HH:mm").diff(moment(startTime[i], "HH:mm"))).format("hh mm")
+
+mybookings.push(
+<div className="card">
+<div className="card-header">
+Booked At:{moment(bookings[i].createdAt).format('YYYY-MM-DD')}<br/>
+Time:{moment(bookings[i].createdAt).format('HH:mm')}<br/>
+currentTime: {currentDate}<br/>
+Duration-:{dur[i]}
+</div>
+<button className="btn btn-dark" id={i} value={bookings[i].slotNumber  }  onClick={e=>(FREESLOT(e.target.value))} style={{"margin":"20px 20px 20px 20px","width":"200px"}}>FREE {bookings[i].slotNumber}
+	
+</button>
+</div>
+	
+)
+	
 		}
 		return mybookings
 	}
