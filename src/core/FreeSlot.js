@@ -56,9 +56,7 @@ Booked <br/>
 on date:{moment(bookings[i].createdAt).format('YYYY-MM-DD')} <br/>
 at time:{moment(bookings[i].createdAt).format('HH:mm')}<br/>
 Total payment-:{dur[i]} rupees<br/>
-{hrs[i]}<br/>
-{currentDatehrs}<br/>
-{startTimehrs[i]}
+
 
 </div>
 <button className="btn btn-success" id={i} value={bookings[i].slotNumber  }  onClick={e=>(FREESLOT(e.target.value))} style={{"margin":"20px 20px 20px 20px","width":"200px"}}>FREE {bookings[i].slotNumber}
