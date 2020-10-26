@@ -25,22 +25,28 @@ const FreeSlot=()=>{
 	{
 		var currentDate = moment().format("HH:mm:ss");
 
-		let dur=[]
-		let startTime=[]
+		let min=[]
+		let hrs=[]
+		let startTimemin=[]
+		let startTimehrs=[]
 		let mybookings=[]
+		let dur=[]
 
 		for(var i=0;i<bookings.length;i++)
 		{
-startTime[i]=moment(bookings[i].createdAt).format('HH:mm')
- dur[i] = moment.utc(moment(currentDate, "HH:mm").diff(moment(startTime[i], "HH:mm"))).format("hh mm")
-
+startTimemin[i]=moment(bookings[i].createdAt).format('mm')
+startTimehrs=moment(bookings[i].createdAt).format('hh')
+hrs[i]=moment.utc(moment(currentDate, "hh").diff(moment(startTimehrs[i], "hh"))).format("hh")
+min[i] = moment.utc(moment(currentDate, "mm").diff(moment(startTimemin[i], "mm"))).format("mm")
+dur[i]=parseInt(hrs[i]*60)+parseInt(min[i])
 mybookings.push(
 <div className="card">
 <div className="card-header">
-Booked At:{moment(bookings[i].createdAt).format('YYYY-MM-DD')}<br/>
-Time:{moment(bookings[i].createdAt).format('HH:mm')}<br/>
-currentTime: {currentDate}<br/>
-Duration-:{dur[i]}
+Booked <br/>
+on:{moment(bookings[i].createdAt).format('YYYY-MM-DD')}
+at:{moment(bookings[i].createdAt).format('HH:mm')}<br/>
+Duration-:{hrs[i]} Hours {min[i]} Min<br/>
+Total payment-:{dur[i]} rupees
 </div>
 <button className="btn btn-dark" id={i} value={bookings[i].slotNumber  }  onClick={e=>(FREESLOT(e.target.value))} style={{"margin":"20px 20px 20px 20px","width":"200px"}}>FREE {bookings[i].slotNumber}
 	
